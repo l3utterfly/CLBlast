@@ -24,40 +24,21 @@
 # Sets the possible install locations
 set(OPENCL_HINTS
   ${OPENCL_ROOT}
-  $ENV{OPENCL_ROOT}
-  $ENV{OCL_ROOT}
-  $ENV{AMDAPPSDKROOT}
-  $ENV{CUDA_PATH}
-  $ENV{INTELOCLSDKROOT}
-  $ENV{NVSDKCOMPUTE_ROOT}
-  $ENV{ATISTREAMSDKROOT}
-)
-set(OPENCL_PATHS
-  /usr/local/cuda
-  /opt/cuda
-  /opt/intel/opencl
-  /usr
-  /usr/local
-  /opt/rocm/opencl
 )
 
-# Finds the include directories
-find_path(OPENCL_INCLUDE_DIRS
-  NAMES OpenCL/cl.h CL/cl.h
-  HINTS ${OPENCL_HINTS}
-  PATH_SUFFIXES include OpenCL/common/inc inc include/x86_64 include/x64
-  PATHS ${OPENCL_PATHS}
-  DOC "OpenCL include header OpenCL/cl.h or CL/cl.h"
+set(OPENCL_PATHS
+  ${OPENCL_ROOT}
 )
+
+set(OPENCL_INCLUDE_DIRS
+  ${OPENCL_ROOT}/include
+)
+
 mark_as_advanced(OPENCL_INCLUDE_DIRS)
 
 # Finds the library
-find_library(OPENCL_LIBRARIES
-  NAMES OpenCL
-  HINTS ${OPENCL_HINTS}
-  PATH_SUFFIXES lib lib64 lib/x86_64 lib/x86_64/sdk lib/x64 lib/x86 lib/Win32 OpenCL/common/lib/x64
-  PATHS ${OPENCL_PATHS}
-  DOC "OpenCL library"
+set(OPENCL_LIBRARIES
+  ${OPENCL_ROOT}/lib/libOpenCL.so
 )
 mark_as_advanced(OPENCL_LIBRARIES)
 
